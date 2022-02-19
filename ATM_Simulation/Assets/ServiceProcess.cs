@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class ServiceProcess : MonoBehaviour
 {
-    public GameObject carInService;
-    public Transform carExitPlace;
+    public GameObject ATMService;
+    public Transform ExitPlace;
 
-    public float serviceRateAsCarsPerHour = 25; // car/hour
+    public float serviceRateAsPeoplePerHour = 25; // car/hour
     public float interServiceTimeInHours; // = 1.0 / ServiceRateAsCarsPerHour;
     private float interServiceTimeInMinutes;
     private float interServiceTimeInSeconds;
@@ -40,7 +40,7 @@ public class ServiceProcess : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        interServiceTimeInHours = 1.0f / serviceRateAsCarsPerHour;
+        interServiceTimeInHours = 1.0f / serviceRateAsPeoplePerHour;
         interServiceTimeInMinutes = interServiceTimeInHours * 60;
         interServiceTimeInSeconds = interServiceTimeInMinutes * 60;
         //queueManager = this.GetComponent<QueueManager>();
@@ -55,8 +55,8 @@ public class ServiceProcess : MonoBehaviour
 
         if (other.gameObject.tag == "Car")
         {
-            carInService = other.gameObject;
-            carInService.GetComponent<CarController>().SetInService(true);
+            ATMService = other.gameObject;
+            ATMService.GetComponent<PeopleController>().SetInService(true);
 
             //if (queueManager.Count() == 0)
             //{
@@ -85,7 +85,7 @@ public class ServiceProcess : MonoBehaviour
                     break;
                 case ServiceIntervalTimeStrategy.ExponentialIntervalTime:
                     float U = Random.value;
-                    float Lambda = 1 / serviceRateAsCarsPerHour;
+                    float Lambda = 1 / serviceRateAsPeoplePerHour;
                     timeToNextServiceInSec = Utilities.GetExp(U, Lambda);
                     break;
                 case ServiceIntervalTimeStrategy.ObservedIntervalTime:
@@ -105,15 +105,15 @@ public class ServiceProcess : MonoBehaviour
             //yield return new WaitForSeconds(interServiceTimeInSeconds);
 
         }
-        carInService.GetComponent<CarController>().ExitService(carExitPlace);
+        ATMService.GetComponent<PeopleController>().ExitService(ExitPlace);
 
     }
     private void OnDrawGizmos()
     {
         //BoxCollidercarInService.GetComponent<BoxCollider>
-        if (carInService)
+        if (ATMService)
         {
-            Renderer r = carInService.GetComponent<Renderer>();
+            Renderer r = ATMService.GetComponent<Renderer>();
             r.material.color = Color.green;
 
         }
