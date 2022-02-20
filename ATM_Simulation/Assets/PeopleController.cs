@@ -36,11 +36,11 @@ public class PeopleController : MonoBehaviour
 
         //
         personState = PersonState.Entered;
-        FSMCar();
+        FSMPerson();
 
     }
 
-    void FSMCar()
+    void FSMPerson()
     {
 #if DEBUG_CC
         print("CC.FSMCar:state="+carState+",ID="+this.gameObject.GetInstanceID());
@@ -59,7 +59,7 @@ public class PeopleController : MonoBehaviour
                 DoServiced();
                 break;
             default:
-                print("carState unknown!:" + personState);
+                print("personState unknown!:" + personState);
                 break;
 
         }
@@ -102,7 +102,7 @@ public class PeopleController : MonoBehaviour
     public void ChangeState(PersonState newPersonState)
     {
         this.personState = newPersonState;
-        FSMCar();
+        FSMPerson();
     }
 
     public void FixedUpdate()

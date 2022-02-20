@@ -53,7 +53,7 @@ public class ServiceProcess : MonoBehaviour
         print("ServiceProcess.OnTriggerEnter:otherID=" + other.gameObject.GetInstanceID());
 #endif
 
-        if (other.gameObject.tag == "Car")
+        if (other.gameObject.tag == "people")
         {
             ATMService = other.gameObject;
             ATMService.GetComponent<PeopleController>().SetInService(true);

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ArrivalProcess : MonoBehaviour
 {
 
-    public GameObject carPrefab;
+    public GameObject peoplePrefab;
     public Transform peopleSpawnPlace;
 
     public float arrivalRateAsPeoplePerHour = 20; // car/hour
@@ -59,7 +59,7 @@ public class ArrivalProcess : MonoBehaviour
     {
         while (generateArrivals)
         {
-            GameObject carGO=Instantiate(carPrefab, peopleSpawnPlace.position, Quaternion.identity);
+            GameObject carGO=Instantiate(peoplePrefab, peopleSpawnPlace.position, Quaternion.identity);
             //if (queueManager.Count() > 0)
             //{
             //    queueManager.Add(carGO);
