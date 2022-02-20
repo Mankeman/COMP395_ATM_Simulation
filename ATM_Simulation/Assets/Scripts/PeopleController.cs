@@ -119,12 +119,12 @@ public class PeopleController : MonoBehaviour
             switch (atmServiceChoice)
             {
                 case 1:
-                    timer = Random.Range(45, 51);
+                    timer = Random.Range(11, 15);
                     timerOn = true;
                     reachedATM = true;
                     break;
                 case 2:
-                    timer = Random.Range(20, 31);
+                    timer = Random.Range(5, 11);
                     timerOn = true;
                     reachedATM = true;
                     break;
