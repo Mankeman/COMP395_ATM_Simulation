@@ -108,17 +108,5 @@ public class ServiceProcess : MonoBehaviour
         ATMService.GetComponent<PeopleController>().ExitService(ExitPlace);
 
     }
-    private void OnDrawGizmos()
-    {
-        //BoxCollidercarInService.GetComponent<BoxCollider>
-        if (ATMService)
-        {
-            Renderer r = ATMService.GetComponent<Renderer>();
-            r.material.color = Color.green;
-
-        }
-
-
-    }
 
 }

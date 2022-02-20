@@ -10,6 +10,10 @@ public class PeopleController : MonoBehaviour
     public Transform targetWindow;
     public Transform targetPeople=null;
     public Transform targetExit = null;
+    private int atmServiceChoice = 1;
+    private float timer = 60f;
+    private bool timerOn = false;
+    private bool reachedATM = false;
 
     public bool InService { get; set; }
     public GameObject ATM;
@@ -91,6 +95,7 @@ public class PeopleController : MonoBehaviour
     void DoInService()
     {
         navMeshAgent.isStopped = true;
+        ATMServiceTimer();
         //this.transform.position = targetWindow.position;
         //this.transform.rotation = Quaternion.identity;
     }
@@ -98,6 +103,35 @@ public class PeopleController : MonoBehaviour
     {
         navMeshAgent.SetDestination(targetExit.position);
         navMeshAgent.isStopped = false;
+    }
+    void ATMServiceTimer()
+    {
+        if (reachedATM == false)
+        {
+            atmServiceChoice = Random.Range(1, 2);
+            Debug.Log("ATM Service choice: " + atmServiceChoice);
+            switch (atmServiceChoice)
+            {
+                case 1:
+                    timer = Random.Range(45, 50);
+                    Debug.Log("Timer case 1: " + timer);
+                    timerOn = true;
+                    reachedATM = true;
+                    break;
+                case 2:
+                    timer = Random.Range(20, 30);
+                    Debug.Log("Timer case 2: " + timer);
+                    timerOn = true;
+                    reachedATM = true;
+                    break;
+                default:
+                    timer = Random.Range(20, 50);
+                    Debug.Log("Timer case default: " + timer);
+                    timerOn = true;
+                    reachedATM = true;
+                    break;
+            }
+        }
     }
     public void ChangeState(PersonState newPersonState)
     {
@@ -107,20 +141,18 @@ public class PeopleController : MonoBehaviour
 
     public void FixedUpdate()
     {
-
-//        if (carState == CarState.Entered)
-//        {
-//            if (targetCar == null)
-//            {
-//#if DEBUG_CC
-//            print("***** CarController.FixedUpdate:targetCar.pos=" + targetCar.position);
-//#endif
-//                targetCar = targetWindow;
-//                //navMeshAgent.SetDestination(targetCar.position);
-//                navMeshAgent.isStopped = false;
-//            }
-//        }
-
+        if(timerOn)
+        {
+            timer -= Time.deltaTime;
+            if(timer <= 0f)
+            {
+                Debug.Log("Timer reached 0");
+                ChangeState(PersonState.Serviced);
+                timer = 50f;
+                timerOn = false;
+                Debug.Log("TimerON Bool: " + timerOn);
+            }
+        }    
     }
     public void SetInService(bool value)
     {
@@ -165,32 +197,6 @@ public class PeopleController : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-    }
-
-
-    private void OnDrawGizmos()
-    {
-#if DEBUG_CC
-        print("InCC.OnDrawGizmos:targetCar.ID=" + targetCar.gameObject.GetInstanceID());
-        print("InCC.OnDrawGizmos:targetCar.ID=" + targetExit.gameObject.GetInstanceID());
-
-#endif
-        Gizmos.color = Color.red;
-        Gizmos.DrawLine(this.transform.position, targetWindow.transform.position);
-        if (targetPeople)
-        {
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawLine(this.transform.position, targetPeople.transform.position);
-
-        }
-        if (targetExit)
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawLine(this.transform.position, targetExit.transform.position);
-
-        }
-
-
     }
 
 }
