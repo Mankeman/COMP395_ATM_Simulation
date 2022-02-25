@@ -30,4 +30,20 @@ public class UIScript : MonoBehaviour
             statusText.color = Color.red;
         }
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("person"))
+        {
+            isFree = false;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("person"))
+        {
+            isFree = true;
+        }
+    }
 }

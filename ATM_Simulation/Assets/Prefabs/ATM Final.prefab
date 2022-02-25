@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 252680159326089813}
   - component: {fileID: 2592582630754332015}
   - component: {fileID: 3872654706893154403}
+  - component: {fileID: 1751707596}
   m_Layer: 0
   m_Name: ATM Final
   m_TagString: Untagged
@@ -61,6 +62,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFree: 0
   statusText: {fileID: 0}
+--- !u!65 &1751707596
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 633428548783958255}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.541638, y: 1.8506671, z: 2.9486709}
+  m_Center: {x: -0.45604897, y: -0.4253338, z: 0.037350774}
 --- !u!1 &6799005295168200999
 GameObject:
   m_ObjectHideFlags: 0
